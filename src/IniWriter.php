@@ -94,7 +94,13 @@ class IniWriter
 
                 if (is_array($value)) {
                     foreach ($value as $currentValue) {
-                        $ini .= $option . '[] = ' . $this->encodeValue($currentValue) . "\n";
+                        if (is_array($currentValue)) {
+                            foreach ($currentValue as $currentcurrentValue) {
+                                $ini .= $option . '[] = ' . $this->encodeValue($currentcurrentValue) . "\n";
+                            }
+                        } else {
+                            $ini .= $option . '[] = ' . $this->encodeValue($currentValue) . "\n";
+                        }
                     }
                 } else {
                     $ini .= $option . ' = ' . $this->encodeValue($value) . "\n";
